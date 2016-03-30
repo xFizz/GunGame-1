@@ -19,29 +19,9 @@ public class Arena implements Listener{
 	
 	
 	
-	public String prefix = "§6[§bGunGame§6] ";
+	public String prefix = "Â§6[Â§bGunGameÂ§6] ";
 	
-	@EventHandler
-	public void onSignInteract(PlayerInteractEvent e) {
-		Player p = e.getPlayer();
-		
-			if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-				if (e.getClickedBlock().getState() instanceof Sign) {
-					Sign s = (Sign) e.getClickedBlock().getState();
-					
 
-					if (s.getLine(0).equalsIgnoreCase("§6[§bGunGame§6]")) {
-						p.getInventory().clear();
-						p.updateInventory();
-						
-						
-						
-						
-		
-					}
-				}
-			}
-	}
 	
 	public List<Location> signs = new ArrayList<Location>();
 	
@@ -118,24 +98,24 @@ public class Arena implements Listener{
 		if (l.getBlock().getType() == Material.WALL_SIGN) {
 			Block b = l.getBlock();
 			Sign s = (Sign) b.getState();
-			s.setLine(0, "§6[§bGunGame§6]");
-			s.setLine(1, "§a" + (this.arenaID+1));
+			s.setLine(0, "Â§6[Â§bGunGameÂ§6]");
+			s.setLine(1, "Â§a" + (this.arenaID+1));
 			
 			switch (this.phase) {
 			case COUNTDOWN:
-				s.setLine(2, "§4Not joinable");
+				s.setLine(2, "Â§4Not joinable");
 				break;
 			case ENDING:
-				s.setLine(2, "§4Not joinable");
+				s.setLine(2, "Â§4Not joinable");
 				break;
 			case LOBBY:
-				s.setLine(2, "§5§lIn Lobby");
+				s.setLine(2, "Â§5Â§lIn Lobby");
 				break;
 			case RUNNING:
-				s.setLine(2, "§4Not joinable");
+				s.setLine(2, "Â§4Not joinable");
 				break;
 			case STARTING:
-				s.setLine(2, "§6Starting...");
+				s.setLine(2, "Â§6Starting...");
 				break;
 			}
 			
@@ -166,7 +146,7 @@ public class Arena implements Listener{
 						p.teleport(temp_spawns.get(0));
 						temp_spawns.remove(0);
 					} else {
-						System.out.println("§cERROR: No spawns available!!");
+						System.out.println("Â§cERROR: No spawns available!!");
 					}
 				} catch (Exception e1) {
 				}
@@ -183,12 +163,12 @@ public class Arena implements Listener{
 		updateSigns();
 		
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + p.getName() + " 200");
-		p.sendMessage(prefix + "§a§lYou won a GunGame-Round! §6§lYou have been rewarded with §e§l200$");
+		p.sendMessage(prefix + "Â§aÂ§lYou won a GunGame-Round! Â§6Â§lYou have been rewarded with Â§eÂ§l200$");
 		
 		for (Player pl : this.manager.getPlayerList(this.getID())) {
 			if (pl != p) {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + pl.getName() + " 10");
-				pl.sendMessage(prefix + "§a§lYou played a GunGame-Round! §6§lYou have been rewarded with §e§l10$");
+				pl.sendMessage(prefix + "Â§aÂ§lYou played a GunGame-Round! Â§6Â§lYou have been rewarded with Â§eÂ§l10$");
 			}
 			pl.teleport(this.manager.plugin.mainSpawn);
 			
@@ -219,11 +199,11 @@ public class Arena implements Listener{
 				updateSigns();
 				
 			} else {
-				p.sendMessage(prefix + "§c§lThis arena is already running!");
+				p.sendMessage(prefix + "Â§cÂ§lThis arena is already running!");
 			}
 			
 		} else {
-			p.sendMessage(prefix + "§cThis arena is already full!");
+			p.sendMessage(prefix + "Â§cThis arena is already full!");
 		}
 		
 		if (this.minPlayers <= this.manager.getPlayers(this.arenaID) && this.phase == ArenaPhase.LOBBY) {
@@ -233,7 +213,7 @@ public class Arena implements Listener{
 			updateSigns();
 			
 			for (Player pl : this.manager.getPlayerList(this.arenaID)) {
-				pl.sendMessage(prefix + "§6§lThe game will start in 15 seconds!");
+				pl.sendMessage(prefix + "Â§6Â§lThe game will start in 15 seconds!");
 			}
 			
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.manager.plugin, new Runnable() {
@@ -241,7 +221,7 @@ public class Arena implements Listener{
 				@Override
 				public void run() {
 					for (Player pl : manager.getPlayerList(arenaID)) {
-						pl.sendMessage(prefix + "§6§lThe game will start in 5 seconds!");
+						pl.sendMessage(prefix + "Â§6Â§lThe game will start in 5 seconds!");
 					}
 					
 					Bukkit.getScheduler().scheduleSyncDelayedTask(manager.plugin, new Runnable() {
@@ -249,7 +229,7 @@ public class Arena implements Listener{
 						@Override
 						public void run() {
 							for (Player pl : manager.getPlayerList(arenaID)) {
-								pl.sendMessage(prefix + "§6§lThe game is starting...");
+								pl.sendMessage(prefix + "Â§6Â§lThe game is starting...");
 							}
 							
 							startArena();
@@ -293,56 +273,56 @@ public class Arena implements Listener{
 		updateSigns();
 		
 		for (Player pl : manager.getPlayerList(arenaID)) {
-			pl.sendMessage(prefix + "§6§lThe game starts in 30sec");
+			pl.sendMessage(prefix + "Â§6Â§lThe game starts in 30sec");
 		}
 		Bukkit.getScheduler().scheduleSyncDelayedTask(manager.plugin, new Runnable() {
 			
 			@Override
 			public void run() {
 				for (Player pl : manager.getPlayerList(arenaID)) {
-					pl.sendMessage(prefix + "§6§lThe game starts in 20sec");
+					pl.sendMessage(prefix + "Â§6Â§lThe game starts in 20sec");
 				}
 				Bukkit.getScheduler().scheduleSyncDelayedTask(manager.plugin, new Runnable() {
 					
 					@Override
 					public void run() {
 						for (Player pl : manager.getPlayerList(arenaID)) {
-							pl.sendMessage(prefix + "§6§lThe game starts in 10sec");
+							pl.sendMessage(prefix + "Â§6Â§lThe game starts in 10sec");
 						}
 						Bukkit.getScheduler().scheduleSyncDelayedTask(manager.plugin, new Runnable() {
 							
 							@Override
 							public void run() {
 								for (Player pl : manager.getPlayerList(arenaID)) {
-									pl.sendMessage(prefix + "§6§lThe game starts in 5sec");
+									pl.sendMessage(prefix + "Â§6Â§lThe game starts in 5sec");
 								}
 								Bukkit.getScheduler().scheduleSyncDelayedTask(manager.plugin, new Runnable() {
 									
 									@Override
 									public void run() {
 										for (Player pl : manager.getPlayerList(arenaID)) {
-											pl.sendMessage(prefix + "§6§lThe game starts in 3sec");
+											pl.sendMessage(prefix + "Â§6Â§lThe game starts in 3sec");
 										}
 										Bukkit.getScheduler().scheduleSyncDelayedTask(manager.plugin, new Runnable() {
 											
 											@Override
 											public void run() {
 												for (Player pl : manager.getPlayerList(arenaID)) {
-													pl.sendMessage(prefix + "§6§lThe game starts in 2sec");
+													pl.sendMessage(prefix + "Â§6Â§lThe game starts in 2sec");
 												}
 												Bukkit.getScheduler().scheduleSyncDelayedTask(manager.plugin, new Runnable() {
 													
 													@Override
 													public void run() {
 														for (Player pl : manager.getPlayerList(arenaID)) {
-															pl.sendMessage(prefix + "§6The game starts in §e1 §6sec");
+															pl.sendMessage(prefix + "Â§6The game starts in Â§e1 Â§6sec");
 														}
 														Bukkit.getScheduler().scheduleSyncDelayedTask(manager.plugin, new Runnable() {
 															
 															@Override
 															public void run() {
 																for (Player pl : manager.getPlayerList(arenaID)) {
-																	pl.sendMessage(prefix + "§6§lYou can now attack eachother!");
+																	pl.sendMessage(prefix + "Â§6Â§lYou can now attack eachother!");
 																}
 																
 																phase = ArenaPhase.RUNNING;
