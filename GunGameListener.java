@@ -52,6 +52,7 @@ public class GunGameListener implements Listener {
 	@EventHandler
 	public void onSignWrite(SignChangeEvent e) {
 		if (e.getLine(0).equalsIgnoreCase("[GunGame]") && e.getPlayer().hasPermission("gungame.sign.create")) {
+			e.setLine(0,prefix);
 			int arenaID = -1;
 			try {
 				arenaID = Integer.valueOf(e.getLine(1));
