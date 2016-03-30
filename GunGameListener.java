@@ -20,7 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class GunGameListener implements Listener {
 	
-	public String prefix = "§6[§bGunGame§6] ";
+	public String prefix = "Â§6[Â§bGunGameÂ§6] ";
 	
 	public GunGameMain plugin;
 	
@@ -37,9 +37,9 @@ public class GunGameListener implements Listener {
 					Sign s = (Sign) e.getClickedBlock().getState();
 					
 
-					if (s.getLine(0).equalsIgnoreCase("§6[§bGunGame§6]")) {
+					if (s.getLine(0).equalsIgnoreCase("Â§6[Â§bGunGameÂ§6]")) {
 						p.getInventory().clear();
-						this.plugin.manager.players.put(p.getName(), 7);
+						
 						
 						
 						
@@ -113,7 +113,7 @@ public class GunGameListener implements Listener {
 				this.plugin.manager.players_level.put(killer.getName(), level);
 				killer.setLevel(level);
 				
-				killer.sendMessage(prefix + " §6You killed " + p.getName() + "! §2Level UP!");
+				killer.sendMessage(prefix + " Â§6You killed " + p.getName() + "! Â§2Level UP!");
 				
 				killer.getInventory().clear();
 				
@@ -132,7 +132,7 @@ public class GunGameListener implements Listener {
 			stick.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 			
 			ItemMeta stick_meta = stick.getItemMeta();
-			stick_meta.setDisplayName("§6§lStick");
+			stick_meta.setDisplayName("Â§6Â§lStick");
 			stick.setItemMeta(stick_meta);
 			
 			p.getInventory().addItem(stick);
